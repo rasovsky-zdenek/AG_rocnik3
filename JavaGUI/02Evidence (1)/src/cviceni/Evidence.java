@@ -37,6 +37,10 @@ public class Evidence {
         zamestnanci.add(new Zamestnanec(jmeno, vek, pohlavi, stav));
     }
     
+    public void smazVsechnyZamestnance(){
+        zamestnanci.clear();
+    }
+    
     public String vypisEvidence(){
         StringBuilder vypis = new StringBuilder();
         //zatim jen do terminalu

@@ -290,17 +290,38 @@ public class Firma extends javax.swing.JFrame {
 
     private void buttonSmazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSmazActionPerformed
          buttonVypis.doClick(); //otevře vypis
-         //dialog pro vymazani
-         UIManager.put("OptionPane.cancelButtonText", "Storno");
-         UIManager.put("OptionPane.noButtonText", "Nic");
-         UIManager.put("OptionPane.okButtonText", "Smaž");
-         UIManager.put("OptionPane.yesButtonText", "Ano");
-         JCheckBox checkbox = new JCheckBox("Chcete smazat vše?");
+         //Nastaveni cestiny pro tlacitka
+         nastaveniCestiny("Storno", "Ne", "OK", "Ano");
+         //nastaveni JCheckbox a zprávy pro uživatele v JOptionPane
+         JCheckBox smazVse = new JCheckBox("Chcete smazat vše?");
          String message = "\n Zadejte číslo zaměstnance pro smazání.";
-         Object[] params = {checkbox,message};
-         JOptionPane.showInputDialog(this, params, "Dialog", JOptionPane.QUESTION_MESSAGE);
-         //JOptionPane.showInputDialog(this, "Zadejte číslo zaměstnance.", "Dialog", JOptionPane.QUESTION_MESSAGE);
+         Object[] params = {smazVse,message}; //pole objektu, ktere se zobrazi v okne
+         String cisloZamestnance = JOptionPane.showInputDialog(this, params, "Dialog", JOptionPane.QUESTION_MESSAGE);
          
+         if(cisloZamestnance == null){
+             //storno
+             labelStatus.setText("Status:");
+         }
+         else if(smazVse.isSelected()){
+             //smaz
+             evidence.smazVsechnyZamestnance();
+             labelStatus.setText("Status: Vše smazáno.");
+             okno.vypisText("");
+         }
+         else{
+            //neni vybrano smaz vse => ptam se na vyplneni cisla zamestnance
+             //pokud je vyplneno resim spravnost int
+             try{
+                 Integer.parseInt(cisloZamestnance);
+                 System.out.println("Posílám k vymazání");
+                 //smazani záznamu z evidence
+                 labelStatus.setText("Status: Smazán záznam.");
+             }
+             catch(NumberFormatException ex){
+                 labelStatus.setText("Status:");
+                 JOptionPane.showMessageDialog(this, "Není zadáno celé číslo!", "Chyba", JOptionPane.ERROR_MESSAGE);
+             } 
+         }  
     }//GEN-LAST:event_buttonSmazActionPerformed
 
     /**
@@ -408,16 +429,18 @@ public class Firma extends javax.swing.JFrame {
             return stav;
         }
     }
-
+    
+    private void nastaveniCestiny(String storno, String no, String ok, String yes) {
+         UIManager.put("OptionPane.cancelButtonText", storno);
+         UIManager.put("OptionPane.noButtonText", no);
+         UIManager.put("OptionPane.okButtonText", ok);
+         UIManager.put("OptionPane.yesButtonText", yes);
+    }
+    
     private void cvicnaEvidence() {
        //cvicni zamestnanci 
        evidence.novyZamestnanec("Novák Jan", 31, "muž", "ženatý");
        evidence.novyZamestnanec("Nováková Pavlína", 29, "žena", "vdaná");
        evidence.novyZamestnanec("Fantiš Karel", 45, "muž", "rozvedený");
     }
-    
-    
-
-    
-
 }
