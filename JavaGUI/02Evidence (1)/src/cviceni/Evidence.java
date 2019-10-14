@@ -41,6 +41,16 @@ public class Evidence {
         zamestnanci.clear();
     }
     
+    void smazZaznam(int cisloZam) throws Exception {
+        if(cisloZam >=1 && cisloZam <= zamestnanci.size()){
+           --cisloZam;
+           zamestnanci.remove(cisloZam);
+        }
+        else{
+            throw new  Exception("Číslo zaměstnance je mimo Evidenci.");
+        }
+    }
+    
     public String vypisEvidence(){
         StringBuilder vypis = new StringBuilder();
         //zatim jen do terminalu
@@ -55,8 +65,5 @@ public class Evidence {
         }
         return vypis.toString();
     }
-    
-    
-    
-    
+  
 }

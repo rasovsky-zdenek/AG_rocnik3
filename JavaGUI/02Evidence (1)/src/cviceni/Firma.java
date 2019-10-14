@@ -265,9 +265,6 @@ public class Firma extends javax.swing.JFrame {
             labelStatus.setText("Stav:");
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Chyba", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        
     }//GEN-LAST:event_buttonUlozActionPerformed
 
     private void buttonVypisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVypisActionPerformed
@@ -312,14 +309,19 @@ public class Firma extends javax.swing.JFrame {
             //neni vybrano smaz vse => ptam se na vyplneni cisla zamestnance
              //pokud je vyplneno resim spravnost int
              try{
-                 Integer.parseInt(cisloZamestnance);
-                 System.out.println("Posílám k vymazání");
+                 int cisloZam = Integer.parseInt(cisloZamestnance); // metoda osetreni int vstupu (String)
+                 evidence.smazZaznam(cisloZam);
+                 okno.vypisText(evidence.vypisEvidence());
                  //smazani záznamu z evidence
                  labelStatus.setText("Status: Smazán záznam.");
              }
-             catch(NumberFormatException ex){
+             catch(Exception ex){
                  labelStatus.setText("Status:");
-                 JOptionPane.showMessageDialog(this, "Není zadáno celé číslo!", "Chyba", JOptionPane.ERROR_MESSAGE);
+                 String zprava = ex.getMessage();
+                 if(!zprava.equals("Číslo zaměstnance je mimo Evidenci.")){
+                    zprava = "Nezadal jste celé číslo!" ;
+                 }
+                 JOptionPane.showMessageDialog(this, zprava, "Chyba", JOptionPane.ERROR_MESSAGE);
              } 
          }  
     }//GEN-LAST:event_buttonSmazActionPerformed
