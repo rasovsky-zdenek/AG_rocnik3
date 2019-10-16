@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cviceni;
+package cviceni;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
