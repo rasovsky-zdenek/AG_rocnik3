@@ -5,13 +5,11 @@
  */
 package tvary;
 
-import java.awt.Graphics2D;
-
 /**
  *
  * @author rasovsky
  */
-public class Bod implements Tvar {
+public class Bod {
   private int x;
   private int y;
     
@@ -34,10 +32,5 @@ public class Bod implements Tvar {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    @Override
-    public void kresli(Graphics2D g) {
-        g.drawLine(x, y, x, y);
     }
 }

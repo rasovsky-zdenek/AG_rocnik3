@@ -9,27 +9,24 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import tvary.Bod;
 
 /**
  *
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    private Bod bodA,bodB,bodC,bodD,bodE;
+    int sirka,vyska;
+    boolean kresli;
     /**
      * Creates new form Tecka
      */
     public Vzor() {
         initComponents();
-        System.out.println("Šířka: " + panelPlatno.getWidth());//pomocny vypis
-        System.out.println("Výška: " + panelPlatno.getHeight());//pomocny vypis
-        //vytvor objekt s nazvem stred tridy Bod (souradnice budou stred platna
-        bodA = new Bod(90,200);
-        bodB = new Bod(290,200);
-        bodC = new Bod(290,75);
-        bodD = new Bod(90,75);
-        bodE = new Bod(190,25);
+         kresli = false;
+         sirka = panelPlatno.getWidth();
+         vyska = panelPlatno.getHeight();
+        System.out.println("Šířka: " + sirka);//pomocny vypis
+        System.out.println("Výška: " + vyska);//pomocny vypis
     }
 
     /**
@@ -48,9 +45,11 @@ public class Vzor extends javax.swing.JFrame {
                 kresli(g);
             }
         };
+        tlacitkoUhlopricky = new javax.swing.JButton();
+        tlacitkoSmaz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Kreslení");
+        setTitle("Uhlopříčky");
 
         panelPlatno.setBackground(new java.awt.Color(255, 255, 255));
         panelPlatno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -60,52 +59,88 @@ public class Vzor extends javax.swing.JFrame {
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
+        tlacitkoUhlopricky.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tlacitkoUhlopricky.setText("Uhlopříčky");
+        tlacitkoUhlopricky.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tlacitkoUhloprickyActionPerformed(evt);
+            }
+        });
+
+        tlacitkoSmaz.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tlacitkoSmaz.setText("Smaž");
+        tlacitkoSmaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tlacitkoSmazActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tlacitkoUhlopricky, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tlacitkoSmaz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(tlacitkoUhlopricky, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(tlacitkoSmaz, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-public void kresli(Graphics gr){
+    private void tlacitkoUhloprickyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoUhloprickyActionPerformed
+       //nastav kresli na true
+       
+       //volej na objektu panelPlatno metodu repaint()
+    }//GEN-LAST:event_tlacitkoUhloprickyActionPerformed
+
+    private void tlacitkoSmazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoSmazActionPerformed
+       //nastav kresli na false
+       
+       //volej na objektu panelPlatno metodu repaint() 
+    }//GEN-LAST:event_tlacitkoSmazActionPerformed
+
+public void kresli(Graphics gr){  
+    //kresli jen pokud je promenna kresli  rovna true
     System.out.println("Kreslím!");
      //graficky kontext (objekt zodpovedny za vykreslovani) Graphics2D (pretypovani)
-     Graphics2D g = (Graphics2D) gr;
-        //nastaveni tloustky cary tvaru
-        g.setStroke(new BasicStroke(4));//nastaveni tloustky cary (bodu na 5)
-        //nastaveni barvy pro kresleni tvaru
-        //****dopln metodu pro barvu bodu****
-        g.setColor(Color.red);
-      
-        //vykresleni tvaru pomoci metod drawXXXXXX napr drawLine(x1,y1,x2y2); pozij pro souradnice metody setX a setY objektu bod
-        g.drawLine(bodA.getX(), bodA.getY(), bodB.getX(), bodB.getY());
-        g.drawLine(bodB.getX(), bodB.getY(), bodC.getX(), bodC.getY());
-        g.drawLine(bodC.getX(), bodC.getY(), bodD.getX(), bodD.getY());
-        g.drawLine(bodA.getX(), bodA.getY(), bodD.getX(), bodD.getY());
-        g.drawLine(bodC.getX(), bodC.getY(), bodE.getX(), bodE.getY());
-        g.drawLine(bodD.getX(), bodD.getY(), bodE.getX(), bodE.getY());
+     
+        //pomocna metoda pro vyhlazeni car a krivek
         
+        //nastaveni tloustky cary tvaru
+        
+        //nastaveni barvy pro kresleni tvaru
+        
+        //Uhlopricka1 x = 0, y = 0; x1 = sirka, y1 = vyska
+        
+        //Uhlopricka2 x = sirka, y = 0; x1 = 0, y1 = vyska
+            
 }
     /**
      * @param args the command line arguments
@@ -145,8 +180,8 @@ public void kresli(Graphics gr){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelPlatno;
+    private javax.swing.JButton tlacitkoSmaz;
+    private javax.swing.JButton tlacitkoUhlopricky;
     // End of variables declaration//GEN-END:variables
-
-    
 
 }
