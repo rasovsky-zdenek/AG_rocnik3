@@ -9,14 +9,14 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import tvary.SkladTvaru;
+import tvary.Bod;
 
 /**
  *
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    private SkladTvaru skladCar;
+    private Bod bodA,bodB,bodC,bodD,bodE;
     /**
      * Creates new form Tecka
      */
@@ -24,8 +24,12 @@ public class Vzor extends javax.swing.JFrame {
         initComponents();
         System.out.println("Šířka: " + panelPlatno.getWidth());//pomocny vypis
         System.out.println("Výška: " + panelPlatno.getHeight());//pomocny vypis
-       
-        skladCar = new SkladTvaru();
+        //vytvor objekt s nazvem stred tridy Bod (souradnice budou stred platna
+        bodA = new Bod(0,0);//zmenit souradnice
+        bodB = new Bod(0,0);//zmenit souradnice
+        bodC = new Bod(0,0);//zmenit souradnice
+        bodD = new Bod(0,0);//zmenit souradnice
+        bodE = new Bod(0,0);//zmenit souradnice
     }
 
     /**
@@ -38,29 +42,15 @@ public class Vzor extends javax.swing.JFrame {
     private void initComponents() {
 
         panelPlatno = new javax.swing.JPanel(){
-
             protected void paintComponent(Graphics g){
                 super.paintComponent(g);
                 //moje kreslici metoda
                 kresli(g);
             }
-
         };
-        tlacitkoSmaz = new javax.swing.JButton();
-        labelX = new javax.swing.JLabel();
-        textFieldX1 = new javax.swing.JTextField();
-        labelY = new javax.swing.JLabel();
-        textFieldY1 = new javax.swing.JTextField();
-        tlacitkoPridejCaru = new javax.swing.JButton();
-        tlacitkoPrekresli = new javax.swing.JButton();
-        textFieldX2 = new javax.swing.JTextField();
-        labelY1 = new javax.swing.JLabel();
-        textFieldY2 = new javax.swing.JTextField();
-        labelX1 = new javax.swing.JLabel();
-        labelPopisekBody = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Kreslení čar");
+        setTitle("Kreslení");
 
         panelPlatno.setBackground(new java.awt.Color(255, 255, 255));
         panelPlatno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -70,167 +60,45 @@ public class Vzor extends javax.swing.JFrame {
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        tlacitkoSmaz.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tlacitkoSmaz.setText("Smaž");
-        tlacitkoSmaz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tlacitkoSmazActionPerformed(evt);
-            }
-        });
-
-        labelX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelX.setText("X1:");
-
-        textFieldX1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textFieldX1.setText("0");
-        textFieldX1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelY.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelY.setText("Y1:");
-
-        textFieldY1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textFieldY1.setText("0");
-        textFieldY1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        tlacitkoPridejCaru.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tlacitkoPridejCaru.setText("Přidej čáru");
-        tlacitkoPridejCaru.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tlacitkoPridejCaruActionPerformed(evt);
-            }
-        });
-
-        tlacitkoPrekresli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tlacitkoPrekresli.setText("Překresli");
-        tlacitkoPrekresli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tlacitkoPrekresliActionPerformed(evt);
-            }
-        });
-
-        textFieldX2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textFieldX2.setText("0");
-        textFieldX2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelY1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelY1.setText("Y2:");
-
-        textFieldY2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textFieldY2.setText("0");
-        textFieldY2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelX1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelX1.setText("X2:");
-
-        labelPopisekBody.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelPopisekBody.setText("Souřadnice bodů:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelX)
-                            .addComponent(labelY)
-                            .addComponent(labelY1)
-                            .addComponent(labelX1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textFieldY1)
-                            .addComponent(textFieldX1)
-                            .addComponent(textFieldX2)
-                            .addComponent(textFieldY2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelPopisekBody)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tlacitkoPridejCaru)
-                        .addGap(18, 18, 18)
-                        .addComponent(tlacitkoPrekresli)
-                        .addGap(18, 18, 18)
-                        .addComponent(tlacitkoSmaz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(labelPopisekBody)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelX)
-                            .addComponent(textFieldX1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelY)
-                            .addComponent(textFieldY1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelX1)
-                            .addComponent(textFieldX2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelY1)
-                            .addComponent(textFieldY2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tlacitkoPridejCaru, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tlacitkoPrekresli, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tlacitkoSmaz, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tlacitkoSmazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoSmazActionPerformed
-        skladCar.smazatCary();
-        panelPlatno.repaint();
-    }//GEN-LAST:event_tlacitkoSmazActionPerformed
-
-    private void tlacitkoPridejCaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoPridejCaruActionPerformed
-        //kontrola vstupu
-        getBody();
-        //vlozeni cary
-        //repaint
-        panelPlatno.repaint();
-    }//GEN-LAST:event_tlacitkoPridejCaruActionPerformed
-
-    private void tlacitkoPrekresliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoPrekresliActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tlacitkoPrekresliActionPerformed
-
 public void kresli(Graphics gr){
     System.out.println("Kreslím!");
      //graficky kontext (objekt zodpovedny za vykreslovani) Graphics2D (pretypovani)
-     Graphics2D g = (Graphics2D) gr;
+     
         //nastaveni tloustky cary tvaru
-        g.setStroke(new BasicStroke(4));//nastaveni tloustky cary (bodu na 5)
+        
         //nastaveni barvy pro kresleni tvaru
-        //****dopln metodu pro barvu bodu****
-        g.setColor(Color.red);
       
-        //vykresleni tvaru pomoci metod drawXXXXXX napr drawLine(x1,y1,x2y2); pozij pro souradnice metody setX a setY objektu bod   
+        //vykresleni tvaru pomoci metod drawXXXXXX napr drawLine(x1,y1,x2,y2); pouzij pro souradnice metody setX a setY objektu bod
+        
+        
 }
     /**
      * @param args the command line arguments
@@ -269,28 +137,8 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel labelPopisekBody;
-    private javax.swing.JLabel labelX;
-    private javax.swing.JLabel labelX1;
-    private javax.swing.JLabel labelY;
-    private javax.swing.JLabel labelY1;
     private javax.swing.JPanel panelPlatno;
-    private javax.swing.JTextField textFieldX1;
-    private javax.swing.JTextField textFieldX2;
-    private javax.swing.JTextField textFieldY1;
-    private javax.swing.JTextField textFieldY2;
-    private javax.swing.JButton tlacitkoPrekresli;
-    private javax.swing.JButton tlacitkoPridejCaru;
-    private javax.swing.JButton tlacitkoSmaz;
     // End of variables declaration//GEN-END:variables
-
-    private void getBody() {
-        //zisk int hodnot
-        
-        //kontrola bodu1 a bodu2
-        
-        //
-    }
 
     
 

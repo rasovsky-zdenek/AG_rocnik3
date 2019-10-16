@@ -25,11 +25,11 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + panelPlatno.getWidth());//pomocny vypis
         System.out.println("Výška: " + panelPlatno.getHeight());//pomocny vypis
         //vytvor objekt s nazvem stred tridy Bod (souradnice budou stred platna
-        bodA = new Bod(90,175);
-        bodB = new Bod(190,175);
-        bodC = new Bod(190,75);
+        bodA = new Bod(90,200);
+        bodB = new Bod(290,200);
+        bodC = new Bod(290,75);
         bodD = new Bod(90,75);
-        bodE = new Bod(140,25);
+        bodE = new Bod(190,25);
     }
 
     /**
@@ -48,11 +48,6 @@ public class Vzor extends javax.swing.JFrame {
                 kresli(g);
             }
         };
-        tlacitkoPrekresli = new javax.swing.JButton();
-        labelX = new javax.swing.JLabel();
-        fieldX = new javax.swing.JTextField();
-        labelY = new javax.swing.JLabel();
-        fieldY = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kreslení");
@@ -65,85 +60,33 @@ public class Vzor extends javax.swing.JFrame {
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 378, Short.MAX_VALUE)
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
-        tlacitkoPrekresli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tlacitkoPrekresli.setText("Překresli");
-        tlacitkoPrekresli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tlacitkoPrekresliActionPerformed(evt);
-            }
-        });
-
-        labelX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelX.setText("X:");
-
-        fieldX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        fieldX.setText("0");
-        fieldX.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        labelY.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        labelY.setText("Y:");
-
-        fieldY.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        fieldY.setText("0");
-        fieldY.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelX)
-                            .addComponent(labelY))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldY)
-                            .addComponent(fieldX)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(24, Short.MAX_VALUE)
-                        .addComponent(tlacitkoPrekresli)))
-                .addGap(18, 18, 18)
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelX)
-                            .addComponent(fieldX, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelY)
-                            .addComponent(fieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addComponent(tlacitkoPrekresli, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tlacitkoPrekresliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoPrekresliActionPerformed
-        panelPlatno.repaint();
-    }//GEN-LAST:event_tlacitkoPrekresliActionPerformed
 
 public void kresli(Graphics gr){
     System.out.println("Kreslím!");
@@ -201,12 +144,7 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField fieldX;
-    private javax.swing.JTextField fieldY;
-    private javax.swing.JLabel labelX;
-    private javax.swing.JLabel labelY;
     private javax.swing.JPanel panelPlatno;
-    private javax.swing.JButton tlacitkoPrekresli;
     // End of variables declaration//GEN-END:variables
 
     

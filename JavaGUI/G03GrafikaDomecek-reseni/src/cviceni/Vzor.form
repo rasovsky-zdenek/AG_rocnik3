@@ -25,26 +25,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelX" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labelY" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="fieldY" max="32767" attributes="0"/>
-                          <Component id="fieldX" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Component id="tlacitkoPrekresli" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="panelPlatno" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <Component id="panelPlatno" min="-2" pref="380" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -52,27 +34,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Component id="panelPlatno" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelX" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fieldX" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="labelY" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="fieldY" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="tlacitkoPrekresli" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Component id="panelPlatno" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,7 +63,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="278" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="378" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -109,54 +73,5 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JButton" name="tlacitkoPrekresli">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="P&#x159;ekresli"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tlacitkoPrekresliActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelX">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="X:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="fieldX">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelY">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Y:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="fieldY">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>
