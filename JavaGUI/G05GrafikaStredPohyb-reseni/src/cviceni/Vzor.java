@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cviceni;
+package cviceni;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JTextField;
 
@@ -15,29 +16,24 @@ import javax.swing.JTextField;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    private Bod stred;
-    private Bod levyHorni;
-    private Bod levySpodni;
-    private Bod pravyHorni;
-    private Bod pravySpodni;
-    private final Graphics2D g;
-            
+    private int vyska,sirka;
+    private Bod stred,levyHorni,levySpodni,pravyHorni,pravySpodni;
     /**
      * Creates new form Tecka
      */
     public Vzor() {
         initComponents();
-        stred = new Bod(panelPlatno.getWidth()/2,panelPlatno.getHeight()/2);
+        sirka = panelPlatno.getWidth();
+        vyska = panelPlatno.getHeight();
+        stred = new Bod(sirka/2,vyska/2);
         levyHorni = new Bod(0,0);
-        levySpodni = new Bod(0,panelPlatno.getHeight());
-        pravyHorni = new Bod(panelPlatno.getWidth(),0);
-        pravySpodni = new Bod(panelPlatno.getWidth(),panelPlatno.getHeight());
-        
-        g = (Graphics2D)panelPlatno.getGraphics();
-        Grafika.antialiasing(g);
-        
+        levySpodni = new Bod(0,vyska);
+        pravyHorni = new Bod(sirka,0);
+        pravySpodni = new Bod(sirka,vyska);
         fieldX.setText(String.valueOf(stred.getX()));
         fieldY.setText(String.valueOf(stred.getY()));
+        System.out.println("Šířka: " + sirka);//pomocny vypis
+        System.out.println("Výška: " + vyska);//pomocny vypis
     }
 
     /**
@@ -49,15 +45,21 @@ public class Vzor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelPlatno = new javax.swing.JPanel();
+        panelPlatno = new javax.swing.JPanel(){
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                //moje kreslici metoda
+                kresli(g);
+            }
+        };
+        tlacitkoPrekresli = new javax.swing.JButton();
         labelX = new javax.swing.JLabel();
         fieldX = new javax.swing.JTextField();
         labelY = new javax.swing.JLabel();
         fieldY = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Střed");
-        setResizable(false);
+        setTitle("Kreslení");
 
         panelPlatno.setBackground(new java.awt.Color(255, 255, 255));
         panelPlatno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -74,43 +76,46 @@ public class Vzor extends javax.swing.JFrame {
             .addGap(0, 248, Short.MAX_VALUE)
         );
 
+        tlacitkoPrekresli.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tlacitkoPrekresli.setText("Překresli");
+        tlacitkoPrekresli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tlacitkoPrekresliActionPerformed(evt);
+            }
+        });
+
         labelX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labelX.setText("X:");
 
         fieldX.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        fieldX.setText("0");
         fieldX.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        fieldX.setName("X"); // NOI18N
-        fieldX.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldXFocusLost(evt);
-            }
-        });
 
         labelY.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         labelY.setText("Y:");
 
         fieldY.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        fieldY.setText("0");
         fieldY.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        fieldY.setName("Y"); // NOI18N
-        fieldY.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldYFocusLost(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelX)
-                    .addComponent(labelY))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldY, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                    .addComponent(fieldX))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelX)
+                            .addComponent(labelY))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldY)
+                            .addComponent(fieldX)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(24, Short.MAX_VALUE)
+                        .addComponent(tlacitkoPrekresli)))
                 .addGap(18, 18, 18)
                 .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -123,14 +128,16 @@ public class Vzor extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
+                        .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelX)
                             .addComponent(fieldX, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelY)
-                            .addComponent(fieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(fieldY, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(tlacitkoPrekresli, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
@@ -138,18 +145,29 @@ public class Vzor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldXFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldXFocusLost
+    private void tlacitkoPrekresliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoPrekresliActionPerformed
         int x = parsovaniX(fieldX);
         stred.setX(x);
-        kresli();
-    }//GEN-LAST:event_fieldXFocusLost
-
-    private void fieldYFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldYFocusLost
         int y = parsovaniY(fieldY);
         stred.setY(y);
-        kresli();
-    }//GEN-LAST:event_fieldYFocusLost
+        panelPlatno.repaint();
+    }//GEN-LAST:event_tlacitkoPrekresliActionPerformed
 
+public void kresli(Graphics gr){
+    System.out.println("Kreslím!");
+     //graficky kontext (objekt zodpovedny za vykreslovani) Graphics2D (pretypovani)
+     Graphics2D g = (Graphics2D)gr;
+        //pomocna metoda pro vyhlazeni car a krivek
+        Grafika.antialiasing(g);
+        //nastaveni tloustky cary tvaru a barvy
+        g.setStroke(new BasicStroke(3));
+        g.setColor(Color.red);
+        //vykresleni car pomoci g.drawLine(x1,y1,x2,y2)
+        g.drawLine(levyHorni.getX(), levyHorni.getY(), stred.getX(), stred.getY());
+        g.drawLine(pravyHorni.getX(), pravyHorni.getY(), stred.getX(), stred.getY());
+        g.drawLine(levySpodni.getX(), levySpodni.getY(), stred.getX(), stred.getY());
+        g.drawLine(pravySpodni.getX(), pravySpodni.getY(), stred.getX(), stred.getY());
+}
     /**
      * @param args the command line arguments
      */
@@ -192,8 +210,8 @@ public class Vzor extends javax.swing.JFrame {
     private javax.swing.JLabel labelX;
     private javax.swing.JLabel labelY;
     private javax.swing.JPanel panelPlatno;
+    private javax.swing.JButton tlacitkoPrekresli;
     // End of variables declaration//GEN-END:variables
-
 
     private int parsovaniX(JTextField field) {
         int x = Integer.parseInt(field.getText());
@@ -216,20 +234,5 @@ public class Vzor extends javax.swing.JFrame {
                return y;
            }
     }
-
-    private void kresli() {
-        //priprava
-        panelPlatno.paint(g);//nebo paint(g) prekresli platno
-        
-        //kresleni
-        g.setStroke(new BasicStroke(3));
-        g.setColor(Color.black);
-        
-        g.drawLine(levyHorni.getX(), levyHorni.getY(), stred.getX(), stred.getY());
-        g.drawLine(pravyHorni.getX(), pravyHorni.getY(), stred.getX(), stred.getY());
-        g.drawLine(levySpodni.getX(), levySpodni.getY(), stred.getX(), stred.getY());
-        g.drawLine(pravySpodni.getX(), pravySpodni.getY(), stred.getX(), stred.getY());
-    }
-
     
 }
