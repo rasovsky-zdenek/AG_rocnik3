@@ -9,15 +9,16 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import tvary.Bod;
 
 /**
  *
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    private Bod levyHorni, pravyDolni, stredPlatna;
-    private int delkaObdelnika, vyskaObdelnika, sirkaPlatna, vyskaPlatna;
+    //pomocne body levyHorni, pravyDolni, stredPlatna;
+    
+    //pomocne rozmery obdelnika int delkaObdelnika, vyskaObdelnika, 
+    int sirkaPlatna, vyskaPlatna;
     /**
      * Creates new form Tecka
      */
@@ -29,11 +30,10 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + sirkaPlatna);//pomocny vypis
         System.out.println("Výška: " + vyskaPlatna);//pomocny vypis
         
-        //nastaveni levyHorni bod, delka a sirka; natsaveni na stred
-        stredPlatna = new Bod(sirkaPlatna/2,vyskaPlatna/2);
-        levyHorni = new Bod(0,0);
-        pravyDolni = new Bod(0,0);
-        obdelnikNaStred(); //volani metody, ktera umisti obdelnik na stred
+        //nastaveni stredPlatna, levyHorni a pravyDolniBod bod, nastaveni na stred
+        
+        //volani metody, ktera umisti obdelnik na stred obdelnikNaStred(); 
+        
     }
 
     /**
@@ -177,8 +177,8 @@ public class Vzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tlacitkoPrekresliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoPrekresliActionPerformed
-        //ziskani souradnic levyHorni bod, sirky a delky
-        getCoordinates();
+        //ziskani souradnic levyHorni bod, sirky a delky getCoordinates()
+        
         panelPlatno.repaint();
     }//GEN-LAST:event_tlacitkoPrekresliActionPerformed
 
@@ -191,7 +191,7 @@ public void kresli(Graphics gr){
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
         //vykresleni tvaru pomoci metody fillRect(levyhorniX,levyhorniY,delka,vyska)
-        g.fillRect(levyHorni.getX(), levyHorni.getY(), delkaObdelnika, vyskaObdelnika);
+        
 }
     /**
      * @param args the command line arguments
@@ -249,35 +249,27 @@ public void kresli(Graphics gr){
        delka = Integer.parseInt(textFieldDelka.getText());//zadana delka obdelnika
        vyska = Integer.parseInt(textFieldVyska.getText());//zadana vyska obdelnika
        // pomocny bod vpravo dole
-       pravyDolni.setX(x+delka); 
-       pravyDolni.setY(y+vyska);
+       //pravyDolni.setX(x+delka); 
+       //pravyDolni.setY(y+vyska);
 
-       if((x < 0 || y < 0) || (pravyDolni.getX() > sirkaPlatna || pravyDolni.getY() > vyskaPlatna)){
+       if((x < 0 || y < 0) || ((x + delka) > sirkaPlatna || (y +vyska) > vyskaPlatna)){
            obdelnikNaStred();
        }
        else{
-          //nastaveni souradnic na nove hodnoty zadane utivatelem
-           levyHorni.setX(x);
-           levyHorni.setY(y);
-           delkaObdelnika = delka;
-           vyskaObdelnika = vyska;
+          //nastaveni souradnic na nove hodnoty zadane utivatelem - levyHorni, delkaObdelnika, vyskaObdelnika ;
+           
        }
        
     }
     
     private void obdelnikNaStred(){
         //nastaveni delky a vysky obdelnika
-          delkaObdelnika = 150;
-          vyskaObdelnika = 60;
+          
         //nastaveni souradnic levehoHorniho bodu
-          levyHorni.setX(stredPlatna.getX()-delkaObdelnika/2);
-          levyHorni.setY(stredPlatna.getY()-vyskaObdelnika/2); 
+          
             
         //hodnoty v polich fieldX a fieldY nastaveny na stred
-           textFieldX.setText(String.valueOf(levyHorni.getX()));
-           textFieldY.setText(String.valueOf(levyHorni.getY())); 
-           textFieldDelka.setText(String.valueOf(delkaObdelnika)); 
-           textFieldVyska.setText(String.valueOf(vyskaObdelnika));
+           
     }
 
 }
