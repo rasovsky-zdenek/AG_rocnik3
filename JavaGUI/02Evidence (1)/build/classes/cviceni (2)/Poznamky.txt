@@ -1,7 +1,0 @@
-1) Enter stisk znamená uložení do databáze 
-    - kontrola, jestli je věk číslo int a jméno + věk nejsou prázdné; zároveň kontrola, že radioButtons v obou skupinách jsou vyplněné
-2) Ostatní tlačítka použijí Mnemonic
-3) Výpis bude obsahovat pořadová čísla záznamů
-4) Aktualizace proběhne po zadání čísla záznamu. Data se objeví hlavním okně aplikace a zablokují se tlačítka (kromě aktualizuj).
-   Po aktualizaci se zase povolí. Pokud zablokuji tlačítko spojené s Enter, tak Enter nefunguje také.
-5) Smaž tlačítko vymaže záznam na základě pořadového čísla. pokud zadá uživatel slovo All, tak se vymaže celá databáze!
