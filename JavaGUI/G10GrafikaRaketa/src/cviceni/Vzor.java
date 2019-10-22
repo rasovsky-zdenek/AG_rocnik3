@@ -6,13 +6,17 @@
 package cviceni;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 /**
  *
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-
+    Image raketa;
     /**
      * Creates new form Tecka
      */
@@ -21,6 +25,9 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + panelPlatno.getWidth());//pomocny vypis
         System.out.println("Výška: " + panelPlatno.getHeight());//pomocny vypis
         panelPlatno.setFocusable(true);//focus na platno
+        raketa = new ImageIcon("/raketa.png").getImage();
+        
+        
     }
 
     /**
@@ -99,13 +106,12 @@ public class Vzor extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(buttonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonRight, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -155,14 +161,11 @@ public class Vzor extends javax.swing.JFrame {
 
 public void kresli(Graphics gr){
     System.out.println("Kreslím!");
-     //graficky kontext (objekt zodpovedny za vykreslovani) Graphics2D (pretypovani)
-        //pomocna metoda pro vyhlazeni car a krivek
-        
-        //nastaveni tloustky cary tvaru
-        
-        //nastaveni barvy pro kresleni tvaru
-        
-        //vykresleni tvaru pomoci metod drawXXXXXX napr drawLine(x1,y1,x2y2)
+     //Graphics2D
+     Graphics2D g = (Graphics2D)gr;
+     System.out.println("Raketa šířka: ");
+     boolean z = g.drawImage(raketa, 100, 100, null);
+     System.out.println(z);
 }
     /**
      * @param args the command line arguments
