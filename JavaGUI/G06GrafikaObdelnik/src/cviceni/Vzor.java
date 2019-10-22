@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    //pomocne body levyHorni, pravyDolni, stredPlatna;
+    //pomocne body levyHorni,  stredPlatna;
     
     //pomocne rozmery obdelnika int delkaObdelnika, vyskaObdelnika, 
     int sirkaPlatna, vyskaPlatna;
@@ -30,7 +30,7 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + sirkaPlatna);//pomocny vypis
         System.out.println("Výška: " + vyskaPlatna);//pomocny vypis
         
-        //nastaveni stredPlatna, levyHorni a pravyDolniBod bod, nastaveni na stred
+        //nastaveni stredPlatna, levyHorni, nastaveni na stred
         
         //volani metody, ktera umisti obdelnik na stred obdelnikNaStred(); 
         
@@ -249,16 +249,12 @@ public void kresli(Graphics gr){
        delka = Integer.parseInt(textFieldDelka.getText());//zadana delka obdelnika
        vyska = Integer.parseInt(textFieldVyska.getText());//zadana vyska obdelnika
        // pomocny bod vpravo dole
-       //pravyDolni.setX(x+delka); 
+       //pravyDolni.setX(x+delka); neni potreba. Obdelnik muze byt i mimo platno
        //pravyDolni.setY(y+vyska);
-
-       if((x < 0 || y < 0) || ((x + delka) > sirkaPlatna || (y +vyska) > vyskaPlatna)){
-           obdelnikNaStred();
-       }
-       else{
+       
           //nastaveni souradnic na nove hodnoty zadane utivatelem - levyHorni, delkaObdelnika, vyskaObdelnika ;
            
-       }
+       
        
     }
     

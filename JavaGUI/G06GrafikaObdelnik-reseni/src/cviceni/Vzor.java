@@ -16,7 +16,7 @@ import tvary.Bod;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    private Bod levyHorni, pravyDolni, stredPlatna;
+    private Bod levyHorni, stredPlatna;
     private int delkaObdelnika, vyskaObdelnika, sirkaPlatna, vyskaPlatna;
     /**
      * Creates new form Tecka
@@ -32,7 +32,7 @@ public class Vzor extends javax.swing.JFrame {
         //nastaveni levyHorni bod, delka a sirka; natsaveni na stred
         stredPlatna = new Bod(sirkaPlatna/2,vyskaPlatna/2);
         levyHorni = new Bod(0,0);
-        pravyDolni = new Bod(0,0);
+        //pravyDolni = new Bod(0,0); neni potreba. Obdelnik bude sestrojitelny kdekoliv (i mimo platno)
         obdelnikNaStred(); //volani metody, ktera umisti obdelnik na stred
     }
 
@@ -249,19 +249,13 @@ public void kresli(Graphics gr){
        delka = Integer.parseInt(textFieldDelka.getText());//zadana delka obdelnika
        vyska = Integer.parseInt(textFieldVyska.getText());//zadana vyska obdelnika
        // pomocny bod vpravo dole
-       pravyDolni.setX(x+delka); 
-       pravyDolni.setY(y+vyska);
-
-       if((x < 0 || y < 0) || (pravyDolni.getX() > sirkaPlatna || pravyDolni.getY() > vyskaPlatna)){
-           obdelnikNaStred();
-       }
-       else{
-          //nastaveni souradnic na nove hodnoty zadane utivatelem
+       //pravyDolni.setX(x+delka); neni potreba
+       //pravyDolni.setY(y+vyska); neni potreba
            levyHorni.setX(x);
            levyHorni.setY(y);
            delkaObdelnika = delka;
            vyskaObdelnika = vyska;
-       }
+       //}
        
     }
     
