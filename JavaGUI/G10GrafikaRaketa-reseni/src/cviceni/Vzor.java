@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  */
 public class Vzor extends javax.swing.JFrame {
     Image raketa;
-    int x, y, sirkaPlatna, vyskaPlatna; //dopln dalsi promenne pro zarovnani na stred (raketaSirka a raketaVyska)
+    int x, y, raketaSirka, raketaVyska, sirkaPlatna, vyskaPlatna;//pozice rakety
     /**
      * Creates new form Tecka
      */
@@ -30,8 +30,9 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Výška: " + vyskaPlatna);//pomocny vypis
         panelPlatno.setFocusable(true);//focus na platno
         raketa = new ImageIcon("src/graphics/raketa.png").getImage();
-        
-        //raketaNaStart(); //vytvor metodu, ktera umisti raketu uprostred dole
+        raketaSirka = raketa.getWidth(null);
+        raketaVyska = raketa.getHeight(null);
+        raketaNaStart();
     }
 
     /**
@@ -153,37 +154,51 @@ public class Vzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpActionPerformed
-        //posun rakety nahoru
+        y-=5;
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonUpActionPerformed
 
     private void buttonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeftActionPerformed
-        //posun rakety doleva
+        x-=5;
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonLeftActionPerformed
 
     private void buttonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDownActionPerformed
-        //posun rakety dolu
+        y+=5;
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonDownActionPerformed
 
     private void buttonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRightActionPerformed
-        //posun rakety doprava
+        x+=5;
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonRightActionPerformed
 
     private void panelPlatnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelPlatnoKeyPressed
-        //dopln kod pro pohyb rakety pomoci sipek
+        int key = evt.getKeyCode();
         
+        switch(key){
+            case KeyEvent.VK_UP: 
+                y-=5;
+                break;
+            case KeyEvent.VK_DOWN: 
+                y+=5;
+                break;
+            case KeyEvent.VK_LEFT: 
+                x-=5;
+                break;
+            case KeyEvent.VK_RIGHT: 
+                x+=5;
+                break;
+        }
         
-        
+        panelPlatno.repaint();
     }//GEN-LAST:event_panelPlatnoKeyPressed
 
 public void kresli(Graphics gr){
     System.out.println("Kreslím!");
      //Graphics2D
      Graphics2D g = (Graphics2D)gr;
-     g.drawImage(raketa, x, y, null);//vylresleni rakety na pozici x,y
+     g.drawImage(raketa, x, y, null);
      
 }
     /**
@@ -231,8 +246,10 @@ public void kresli(Graphics gr){
     // End of variables declaration//GEN-END:variables
 
     private void raketaNaStart() {
-       //umisteni rakety na start (pozice uprostred dole)
-       
+       //umisteni rakety na start (pozice uprostred dole
+       int stredSirka = sirkaPlatna/2; //zjisteni stredu platna;
+       x = stredSirka - (raketaSirka/2); //nastaveni x souradnice rakety na stred
+       y = vyskaPlatna - 5 - (raketaVyska); //nastaveni y souradnice rakety na stred
     }
 
 }
