@@ -28,7 +28,7 @@ public class Vzor extends javax.swing.JFrame {
         vyskaPlatna = panelPlatno.getHeight();
         System.out.println("Šířka: " + sirkaPlatna);//pomocny vypis
         System.out.println("Výška: " + vyskaPlatna);//pomocny vypis
-        panelPlatno.setFocusable(true);//focus na platno
+        panelPlatno.requestFocus();//focus na platno
         raketa = new ImageIcon("src/graphics/raketa.png").getImage();
         raketaSirka = raketa.getWidth(null);
         raketaVyska = raketa.getHeight(null);
@@ -155,25 +155,30 @@ public class Vzor extends javax.swing.JFrame {
 
     private void buttonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpActionPerformed
         y-=5;
+        panelPlatno.requestFocus();
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonUpActionPerformed
 
     private void buttonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeftActionPerformed
         x-=5;
+        panelPlatno.requestFocus();
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonLeftActionPerformed
 
     private void buttonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDownActionPerformed
         y+=5;
+        panelPlatno.requestFocus();
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonDownActionPerformed
 
     private void buttonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRightActionPerformed
         x+=5;
+        panelPlatno.requestFocus();
         panelPlatno.repaint();
     }//GEN-LAST:event_buttonRightActionPerformed
 
     private void panelPlatnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelPlatnoKeyPressed
+        System.out.println("Pohyb");
         int key = evt.getKeyCode();
         
         switch(key){
@@ -251,5 +256,4 @@ public void kresli(Graphics gr){
        x = stredSirka - (raketaSirka/2); //nastaveni x souradnice rakety na stred
        y = vyskaPlatna - 5 - (raketaVyska); //nastaveni y souradnice rakety na stred
     }
-
 }
