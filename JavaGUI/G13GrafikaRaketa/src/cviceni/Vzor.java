@@ -7,9 +7,6 @@ package cviceni;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 
 
 /**
@@ -17,23 +14,23 @@ import javax.swing.ImageIcon;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    Image raketa;
-    int x, y, raketaSirka, raketaVyska, sirkaPlatna, vyskaPlatna;//pozice rakety
-    boolean up,down,left,right;
+    //Vytvor ukazatele na objekty trid Canvas, Rocket
+    
+    //vytvor promenne left, right typu boolean
+    //promenne pro zjisteni, jestli je klavesa stale stistena
     /**
-     * Creates new form Tecka
+     * vytvoreni objektu
      */
     public Vzor() {
         initComponents();
-        sirkaPlatna = panelPlatno.getWidth();
-        vyskaPlatna = panelPlatno.getHeight();
-        System.out.println("Šířka: " + sirkaPlatna);//pomocny vypis
-        System.out.println("Výška: " + vyskaPlatna);//pomocny vypis
-        panelPlatno.requestFocus();//focus na platno
-        raketa = new ImageIcon("src/graphics/raketa.png").getImage();
-        raketaSirka = raketa.getWidth(null);
-        raketaVyska = raketa.getHeight(null);
-        raketaNaStart();
+        //vytvor objekt tridy Canvas pomoci staticke metody prepareCanvas(panelPlatno)
+        
+        //vytvor objekt tridy Rocket pomoci konstruktoru new Rocket("src/graphics/raketa.png"); konstruktor potrebuje cestu k obrazku rakety
+        
+        //umisti raketu na dolu na stred pomoci metody rocketOnStart(canvas) objektu rocket
+        //canvas je predavan, aby bylo mozne raketu vykreslt na stred
+        
+         
     }
 
     /**
@@ -53,9 +50,7 @@ public class Vzor extends javax.swing.JFrame {
             }
         };
         buttonLeft = new javax.swing.JButton();
-        buttonUp = new javax.swing.JButton();
         buttonRight = new javax.swing.JButton();
-        buttonDown = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Raketa");
@@ -85,33 +80,23 @@ public class Vzor extends javax.swing.JFrame {
 
         buttonLeft.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonLeft.setText("Left");
-        buttonLeft.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonLeftActionPerformed(evt);
+        buttonLeft.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buttonLeftMousePressed(evt);
             }
-        });
-
-        buttonUp.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttonUp.setText("Up");
-        buttonUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonUpActionPerformed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonLeftMouseReleased(evt);
             }
         });
 
         buttonRight.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttonRight.setText("Right");
-        buttonRight.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRightActionPerformed(evt);
+        buttonRight.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buttonRightMousePressed(evt);
             }
-        });
-
-        buttonDown.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttonDown.setText("Down");
-        buttonDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDownActionPerformed(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonRightMouseReleased(evt);
             }
         });
 
@@ -129,12 +114,6 @@ public class Vzor extends javax.swing.JFrame {
                         .addComponent(buttonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(buttonRight, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,101 +121,90 @@ public class Vzor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLeft, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRight, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonDown, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUpActionPerformed
-        y-=5;
-        panelPlatno.requestFocus();
-        panelPlatno.repaint();
-    }//GEN-LAST:event_buttonUpActionPerformed
-
-    private void buttonLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeftActionPerformed
-        x-=5;
-        panelPlatno.requestFocus();
-        panelPlatno.repaint();
-    }//GEN-LAST:event_buttonLeftActionPerformed
-
-    private void buttonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDownActionPerformed
-        y+=5;
-        panelPlatno.requestFocus();
-        panelPlatno.repaint();
-    }//GEN-LAST:event_buttonDownActionPerformed
-
-    private void buttonRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRightActionPerformed
-        x+=5;
-        panelPlatno.requestFocus();
-        panelPlatno.repaint();
-    }//GEN-LAST:event_buttonRightActionPerformed
-
     private void panelPlatnoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelPlatnoKeyPressed
+        //metoda se vola pri stisknuti libovolne klavesy
+        //udalost je spojena s objektem panelu (canvas)
         
-        int key = evt.getKeyCode();
+        //zjisti, kod stisknute klavesy
         
-        if(key == KeyEvent.VK_UP || up){
-            System.out.println(key);
-                up = true;
-                y-=5;
-        }
-        if(key == KeyEvent.VK_DOWN || down){
-            System.out.println(key);
-                down = true;
-                y+=5;
-        }
-        if(key == KeyEvent.VK_LEFT || left){
-            System.out.println(key);
-            System.out.println("left");
-                left = true;
-                x-=5;
-        }
-        if(key == KeyEvent.VK_RIGHT || right){
-            System.out.println("right");
-            System.out.println(key);
-                right = true;
-                x+=5;
-        }
-
-        panelPlatno.repaint();
+        
+        //zjisti, jestli byla stisknuta sipka vlevo
+        //pokud ano, tak nastav promennou left na true
+        
+        //zjisti, jestli byla stisknuta sipka vpravo
+        //pokud ano, tak nastav promennou right na true
+        
     }//GEN-LAST:event_panelPlatnoKeyPressed
 
     private void panelPlatnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelPlatnoKeyReleased
-        int key = evt.getKeyCode();
+        //metoda se vola pri uvolneni libovolne klavesy
+        //udalost je spojena s objektem panelu (canvas)
         
-        if(key == KeyEvent.VK_UP){
-            System.out.println("release up");
-                up = false;
-        }
-        if(key == KeyEvent.VK_DOWN){
-            System.out.println("release down");
-                down = false;
-        }
-        if(key == KeyEvent.VK_LEFT){
-            System.out.println("release left");
-                left = false;
-        }
-        if(key == KeyEvent.VK_RIGHT){
-            System.out.println("release right");
-                right = false;
-        }
+        //zjisti, kod stisknute klavesy
+        
+        
+        //zjisti, jestli byla uvolnena sipka vlevo
+        //pokud ano, tak nastav promennou left na false
+        
+        //zjisti, jestli byla uvolnena sipka vpravo
+        //pokud ano, tak nastav promennou right na false
+        
     }//GEN-LAST:event_panelPlatnoKeyReleased
 
+    private void buttonRightMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRightMousePressed
+        //metoda se vola pri stisknuti mysi na tlacitku Right
+        //zjsti, jestli bylo stisknuto leve tlacitko mysi (hodnota pro leve tlacitko je 1)
+        //pokud ano, tak nastav right na true
+        
+    }//GEN-LAST:event_buttonRightMousePressed
+
+    private void buttonRightMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRightMouseReleased
+        //metoda se vola pri uvolneni mysi na tlacitku Right
+        //pokud ano, tak nastav right na false
+        
+        //nastav requestFocus na objektu canvas; nutne, aby fungovaly sipky
+        
+    }//GEN-LAST:event_buttonRightMouseReleased
+
+    private void buttonLeftMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLeftMousePressed
+        //metoda se vola pri stisknuti mysi na tlacitku Left
+        //zjsti, jestli bylo stisknuto leve tlacitko mysi (hodnota pro leve tlacitko je 1)
+        //pokud ano, tak nastav left na true
+        
+    }//GEN-LAST:event_buttonLeftMousePressed
+
+    private void buttonLeftMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLeftMouseReleased
+        //metoda se vola pri uvolneni mysi na tlacitku Left
+        //pokud ano, tak nastav left na false
+        
+        //nastav requestFocus na objektu canvas; nutne, aby fungovaly sipky
+        
+    }//GEN-LAST:event_buttonLeftMouseReleased
+
 public void kresli(Graphics gr){
-    System.out.println("Kreslím!");
+    //System.out.println("Kreslím!");
      //Graphics2D
      Graphics2D g = (Graphics2D)gr;
-     g.drawImage(raketa, x, y, null);
+     
+     //jestli je left true, pak nastav posun rakety o hodnotu, kterou vrati metoda getDeltaS
+     //zamez, aby raketa nemohla opustit platno
+        
+        //jestli je right true, pak nastav posun rakety o hodnotu, kterou vrati metoda getDeltaS
+        //zamez, aby raketa nemohla opustit platno
+        
+     //vykresli raketu pomoci metody drawRocket objektu rocket   
+     
      
 }
     /**
@@ -276,17 +244,15 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonDown;
     private javax.swing.JButton buttonLeft;
     private javax.swing.JButton buttonRight;
-    private javax.swing.JButton buttonUp;
     private javax.swing.JPanel panelPlatno;
     // End of variables declaration//GEN-END:variables
 
-    private void raketaNaStart() {
-       //umisteni rakety na start (pozice uprostred dole
-       int stredSirka = sirkaPlatna/2; //zjisteni stredu platna;
-       x = stredSirka - (raketaSirka/2); //nastaveni x souradnice rakety na stred
-       y = vyskaPlatna - 5 - (raketaVyska); //nastaveni y souradnice rakety na stred
+    
+    private int getDeltaS() {
+        //dopln kod pro vypocet drahy posunu; rocket.getSpeed() * canvas.getTimerDelay()/1000f;
+        //metoda musi vracet int; vyuzoj Math.round()
+        return 0;
     }
 }
