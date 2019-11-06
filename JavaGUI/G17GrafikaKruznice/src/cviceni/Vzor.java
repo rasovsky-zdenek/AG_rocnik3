@@ -57,28 +57,28 @@ public class Vzor extends javax.swing.JFrame {
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPlatno, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,12 +97,7 @@ public void kresli(Graphics gr){
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
         
-        for (int x = 40; x <= 340; x+=30) {
-              g.drawLine(x, 25, x, 225);
-        }
-        for (int y = 25; y <= 225; y+=20) {
-              g.drawLine(40, y, 340, y);
-        }
+        
         
         
         //Uhlopricka2 y = sirka, y = 0; x1 = 0, y1 = vyska
