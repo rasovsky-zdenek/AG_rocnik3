@@ -93,13 +93,12 @@ public void kresli(Graphics gr){
         //pomocna metoda pro vyhlazeni car a krivek
         Grafika.antialiasing(g);
         //nastaveni tloustky cary tvaru
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(2));
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
-        
+        x = 15;
         for (int i = 1; i <= 20; i++) {
              r = i*10;
-             //x += 15;
              y = 215-r;
              g.drawOval(x, y, 2*r, 2*r);
             
