@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    int sirka,vyska;
+    int sirka,vyska, r,x,y;
     boolean kresli;
     /**
      * Creates new form Tecka
@@ -97,10 +97,13 @@ public void kresli(Graphics gr){
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
         
-        
-        
-        
-        //Uhlopricka2 y = sirka, y = 0; x1 = 0, y1 = vyska
+        for (int i = 1; i <= 20; i++) {
+             r = i*10;
+             //x += 15;
+             y = 215-r;
+             g.drawOval(x, y, 2*r, 2*r);
+            
+        }
             
 }
     /**
