@@ -16,7 +16,7 @@ import tvary.Bod;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    int sirka,vyska, mezera,delkaZubu,vyskaZubu,pocetZubu;
+    int sirka,vyska,okraj,delkaZubu,vyskaZubu,pocetZubu;
     Bod A,B,C;
     /**
      * Creates new form Tecka
@@ -28,10 +28,10 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + sirka);//pomocny vypis
         System.out.println("Výška: " + vyska);//pomocny vypis
         
-        mezera = 15;
+        okraj = 15;
         pocetZubu = 8;
         vyskaZubu = 30;
-        delkaZubu = (sirka-2*mezera)/pocetZubu;
+        delkaZubu = (sirka-2*okraj)/pocetZubu;
         
         A = new Bod(0,(vyska/2)-vyskaZubu);
         B = new Bod(0,vyska/2);
@@ -108,9 +108,9 @@ public void kresli(Graphics gr){
         
         for (int i = 0; i < pocetZubu; i++) {
             int posun = i*delkaZubu;
-            A.setX(posun + mezera + delkaZubu/2);
-            B.setX(posun + mezera);
-            C.setX(posun + mezera + delkaZubu);
+            A.setX(posun + okraj + delkaZubu/2);
+            B.setX(posun + okraj);
+            C.setX(posun + okraj + delkaZubu);
             
             g.drawLine(A.getX(), A.getY(), B.getX(), B.getY());
             g.drawLine(A.getX(), A.getY(), C.getX(), C.getY());

@@ -16,7 +16,7 @@ import tvary.Bod;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame {
-    int sirka,vyska,mezera,pocetCtverecku,deltaX,deltaY;
+    int sirka,vyska, mezera,delkaZubu,vyskaZubu,pocetZubu;
     Bod A,B,C;
     /**
      * Creates new form Tecka
@@ -29,13 +29,13 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Výška: " + vyska);//pomocny vypis
         
         mezera = 15;
-        pocetCtverecku = 20;
-        deltaX = (sirka/2-mezera)/pocetCtverecku;
-        deltaY = deltaX;
+        pocetZubu = 8;
+        vyskaZubu = 30;
+        delkaZubu = (sirka-2*mezera)/pocetZubu;
         
-        A = new Bod(0,0);
-        B = new Bod(0,0);
-        
+        A = new Bod(0,(vyska/2)-vyskaZubu);
+        B = new Bod(0,vyska/2);
+        C = new Bod(0,vyska/2);
     }
 
     /**
@@ -54,8 +54,6 @@ public class Vzor extends javax.swing.JFrame {
                 kresli(g);
             }
         };
-        spinner = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kreslení");
@@ -75,53 +73,26 @@ public class Vzor extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 50, 1));
-        spinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spinnerStateChanged(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Počet zubů");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spinner)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addComponent(panelPlatno, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerStateChanged
-        
-    }//GEN-LAST:event_spinnerStateChanged
 
 public void kresli(Graphics gr){  
     //kresli jen pokud je promenna kresli  rovna true
@@ -135,18 +106,14 @@ public void kresli(Graphics gr){
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
         
-        for (int i = 0; i <= pocetCtverecku; i++) {
-            A.setX(sirka/2 + deltaX*i);
-            A.setY(mezera + deltaY*i);
-            B.setX(mezera + deltaX*i);
-            B.setY(vyska/2 + deltaY*i);
+        for (int i = 0; i < pocetZubu; i++) {
+            int posun = i*delkaZubu;
+            A.setX(posun + mezera + delkaZubu/2);
+            B.setX(posun + mezera);
+            C.setX(posun + mezera + delkaZubu);
             
             g.drawLine(A.getX(), A.getY(), B.getX(), B.getY());
-            
-            A.setX(sirka/2 - deltaX*i);
-            B.setX(sirka - mezera - deltaX*i);
-            
-            g.drawLine(A.getX(), A.getY(), B.getX(), B.getY());
+            g.drawLine(A.getX(), A.getY(), C.getX(), C.getY());
         }
     
 }
@@ -187,9 +154,7 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelPlatno;
-    private javax.swing.JSpinner spinner;
     // End of variables declaration//GEN-END:variables
 
 }
