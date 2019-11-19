@@ -9,15 +9,17 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import tvary.Bod;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
  * @author ag
  */
-public class Vzor extends javax.swing.JFrame {
-    int sirka,vyska, mezera,delkaZubu,vyskaZubu,pocetZubu;
-    Bod A,B,C;
+public class Vzor extends javax.swing.JFrame implements ActionListener {
+    int sirka,vyska,pocetKruhu,polomer,x,y;
+    Timer casovac;
     /**
      * Creates new form Tecka
      */
@@ -28,14 +30,10 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + sirka);//pomocny vypis
         System.out.println("Výška: " + vyska);//pomocny vypis
         
-        mezera = 15; //vzdaálenost od okraje
-        pocetZubu = 8;
-        vyskaZubu = 30;
-        delkaZubu = (sirka-2*mezera)/pocetZubu;
-        
-        A = new Bod(0,(vyska/2)-vyskaZubu);
-        B = new Bod(0,vyska/2);
-        C = new Bod(0,vyska/2);
+        x = sirka/2;
+        y = vyska/2;
+        casovac = new Timer(1000,this);
+        casovac.start();
     }
 
     /**
@@ -54,8 +52,6 @@ public class Vzor extends javax.swing.JFrame {
                 kresli(g);
             }
         };
-        spinner = new javax.swing.JSpinner();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Kreslení");
@@ -75,57 +71,26 @@ public class Vzor extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        spinner.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        spinner.setModel(new javax.swing.SpinnerNumberModel(8, 1, 50, 1));
-        spinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spinnerStateChanged(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Počet zubů:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spinner)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(panelPlatno, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerStateChanged
-        String hodnota = spinner.getValue().toString();
-        pocetZubu = Integer.parseInt(hodnota);
-        delkaZubu = (sirka-2*mezera)/pocetZubu;
-        panelPlatno.repaint();
-    }//GEN-LAST:event_spinnerStateChanged
 
 public void kresli(Graphics gr){  
     //kresli jen pokud je promenna kresli  rovna true
@@ -135,18 +100,21 @@ public void kresli(Graphics gr){
         //pomocna metoda pro vyhlazeni car a krivek
         Grafika.antialiasing(g);
         //nastaveni tloustky cary tvaru
-        g.setStroke(new BasicStroke(2));
+        g.setStroke(new BasicStroke(1));
         //nastaveni barvy pro kresleni tvaru
         g.setColor(Color.red);
         
-        for (int i = 0; i < pocetZubu; i++) {
-            int posun = i*delkaZubu;
-            A.setX(posun + mezera + delkaZubu/2);
-            B.setX(posun + mezera);
-            C.setX(posun + mezera + delkaZubu);
+        for (int i = pocetKruhu; i > 0 ; i--) {
+            polomer = i*10;
+            if(i%2 == 0){
+                g.setColor(Color.gray);
+            }
+            else{
+                g.setColor(Color.black); 
+            }
             
-            g.drawLine(A.getX(), A.getY(), B.getX(), B.getY());
-            g.drawLine(A.getX(), A.getY(), C.getX(), C.getY());
+            g.fillOval(x-polomer, y-polomer, 2*polomer, 2*polomer);
+            
         }
     
 }
@@ -187,9 +155,14 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelPlatno;
-    private javax.swing.JSpinner spinner;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        pocetKruhu ++;
+        if(pocetKruhu == 20) casovac.stop();
+        panelPlatno.repaint();
+    }
 
 }
