@@ -19,8 +19,8 @@ import javax.swing.Timer;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame implements ActionListener {
-    int x,y,sirka,vyska,a,v;
-    double s,s0,t;
+    int x,y,sirka,vyska;
+    double s,s0,t,a,v;
     Image raketa;
     Timer casovac;
     /**
@@ -34,10 +34,11 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
         System.out.println("Výška: " + vyska);//pomocny vypis
         
         raketa = new ImageIcon("src/graphics/raketa.png").getImage();
-        a = 2;
+        a = 5; //0.5*50(počet vykresleni => 25px/s*s je zrychleni
         naStart();
         casovac = new Timer(20,this);
-         
+        popisekZrychleni.setText("a = " + a);
+        popisekRychlost.setText("v = " + v);
     }
 
     /**
@@ -56,6 +57,8 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
                 kresli(g);
             }
         };
+        popisekZrychleni = new javax.swing.JLabel();
+        popisekRychlost = new javax.swing.JLabel();
         tlacitkoStart = new javax.swing.JButton();
         tlacitkoZastav = new javax.swing.JButton();
 
@@ -66,15 +69,29 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
         panelPlatno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelPlatno.setPreferredSize(new java.awt.Dimension(280, 250));
 
+        popisekZrychleni.setText("a =");
+
+        popisekRychlost.setText("v =");
+
         javax.swing.GroupLayout panelPlatnoLayout = new javax.swing.GroupLayout(panelPlatno);
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGroup(panelPlatnoLayout.createSequentialGroup()
+                .addContainerGap(251, Short.MAX_VALUE)
+                .addGroup(panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(popisekZrychleni, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(popisekRychlost, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 348, Short.MAX_VALUE)
+            .addGroup(panelPlatnoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(popisekZrychleni)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(popisekRychlost)
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         tlacitkoStart.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -140,10 +157,26 @@ public void kresli(Graphics gr){
      
      //jestli je left true, pak nastav posun rakety o hodnotu, kterou vrati metoda getDeltaS
      //zamez, aby raketa nemohla opustit platno
+     /*if(a*t*1000 > 100) {
+         v = a*t;
+         a = 0;
+         popisekZrychleni.setText("a = " + a);
+     }*/
+     
+     if(y < -raketa.getHeight(null)) {
+         //presun na zacatek
+         y += vyska;
+         //spocitat v
+         //v = a*t;
+         //t vynulovat
+         //t = 0; 
+     }
      t += casovac.getDelay()/1000.0;
      s = v*t + 0.5*a*t*t;
-     y -= (int)s;
-     System.out.println(t);
+     v = a*t;
+     popisekRychlost.setText("v = " + Math.round(v*100)/100.0);
+     y = vyska - (int)s;//chyba!!!!!!
+     System.out.println("s: " + s + " t: " + t);
      g.drawImage(raketa, x, y, null);
      
 }
@@ -185,6 +218,8 @@ public void kresli(Graphics gr){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panelPlatno;
+    private javax.swing.JLabel popisekRychlost;
+    private javax.swing.JLabel popisekZrychleni;
     private javax.swing.JButton tlacitkoStart;
     private javax.swing.JButton tlacitkoZastav;
     // End of variables declaration//GEN-END:variables
@@ -196,6 +231,7 @@ public void kresli(Graphics gr){
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Časovač");
         panelPlatno.repaint();
     }
 
