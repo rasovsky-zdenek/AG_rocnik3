@@ -19,10 +19,11 @@ import javax.swing.Timer;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame implements ActionListener {
-    int x,y,sirka,vyska;
+    int x,y,sirka,vyska,n;
     double s,s0,t,a,v;
     Image raketa;
     Timer casovac;
+    boolean let;
     /**
      * vytvoreni objektu
      */
@@ -57,10 +58,10 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
                 kresli(g);
             }
         };
-        popisekZrychleni = new javax.swing.JLabel();
-        popisekRychlost = new javax.swing.JLabel();
         tlacitkoStart = new javax.swing.JButton();
         tlacitkoZastav = new javax.swing.JButton();
+        popisekRychlost = new javax.swing.JLabel();
+        popisekZrychleni = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Raketa");
@@ -69,29 +70,15 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
         panelPlatno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelPlatno.setPreferredSize(new java.awt.Dimension(280, 250));
 
-        popisekZrychleni.setText("a =");
-
-        popisekRychlost.setText("v =");
-
         javax.swing.GroupLayout panelPlatnoLayout = new javax.swing.GroupLayout(panelPlatno);
         panelPlatno.setLayout(panelPlatnoLayout);
         panelPlatnoLayout.setHorizontalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPlatnoLayout.createSequentialGroup()
-                .addContainerGap(251, Short.MAX_VALUE)
-                .addGroup(panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(popisekZrychleni, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(popisekRychlost, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+            .addGap(0, 278, Short.MAX_VALUE)
         );
         panelPlatnoLayout.setVerticalGroup(
             panelPlatnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPlatnoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(popisekZrychleni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(popisekRychlost)
-                .addContainerGap(303, Short.MAX_VALUE))
+            .addGap(0, 348, Short.MAX_VALUE)
         );
 
         tlacitkoStart.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -110,6 +97,10 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
             }
         });
 
+        popisekRychlost.setText("v =");
+
+        popisekZrychleni.setText("a =");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,6 +116,12 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tlacitkoZastav, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(popisekZrychleni, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(popisekRychlost, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +132,11 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tlacitkoStart, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tlacitkoZastav, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(popisekRychlost)
+                    .addComponent(popisekZrychleni))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,7 +152,7 @@ public class Vzor extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_tlacitkoZastavActionPerformed
 
 public void kresli(Graphics gr){
-    //System.out.println("Kreslím!");
+    System.out.println("Kreslení:");
      //Graphics2D
      Graphics2D g = (Graphics2D)gr;
      
@@ -164,21 +165,21 @@ public void kresli(Graphics gr){
      }*/
      
      if(y < -raketa.getHeight(null)) {
+         n++;
+         double posunZpet = n*s;
          //presun na zacatek
-         y += vyska;
+         //y += vyska + (raketa.getHeight(null)+5);
          //spocitat v
-         //v = a*t;
+         v = a*t;
          //t vynulovat
-         //t = 0; 
+         
      }
+     
      t += casovac.getDelay()/1000.0;
      s = v*t + 0.5*a*t*t;
-     v = a*t;
-     popisekRychlost.setText("v = " + Math.round(v*100)/100.0);
-     y = vyska - (int)s;//chyba!!!!!!
-     System.out.println("s: " + s + " t: " + t);
-     g.drawImage(raketa, x, y, null);
      
+     y = (vyska - (raketa.getHeight(null)+5)) - (int)s;
+     g.drawImage(raketa, x, y, null);
 }
     /**
      * @param args the command line arguments
@@ -231,7 +232,9 @@ public void kresli(Graphics gr){
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Časovač");
+        //System.out.println("Časovač");
+        System.out.println("s: " + s + " t: " + t + " v: " + a*t);
+        popisekRychlost.setText("v = " + Math.round(a*t*100)/100.0);
         panelPlatno.repaint();
     }
 

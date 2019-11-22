@@ -39,6 +39,13 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="popisekZrychleni" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="popisekRychlost" min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -51,7 +58,12 @@
                   <Component id="tlacitkoStart" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="tlacitkoZastav" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="popisekRychlost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="popisekZrychleni" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -78,40 +90,15 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace pref="251" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="popisekZrychleni" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="popisekRychlost" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="278" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="popisekZrychleni" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="popisekRychlost" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="303" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace min="0" pref="348" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="popisekZrychleni">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="a ="/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="popisekRychlost">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="v ="/>
-          </Properties>
-        </Component>
-      </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="tlacitkoStart">
       <Properties>
@@ -134,6 +121,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tlacitkoZastavActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="popisekRychlost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="v ="/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="popisekZrychleni">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="a ="/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
