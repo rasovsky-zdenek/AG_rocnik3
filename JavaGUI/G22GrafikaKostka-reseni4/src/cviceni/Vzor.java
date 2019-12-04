@@ -35,7 +35,7 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
          vyska = panelPlatno.getHeight();
         System.out.println("Šířka: " + sirka);//pomocny vypis
         System.out.println("Výška: " + vyska);//pomocny vypis
-        Image im = new ImageIcon("").getImage();
+        //Image im = new ImageIcon("").getImage();
         
         cisla = new Image[]{ 
                     new ImageIcon("src/img/1.png").getImage(),
@@ -140,9 +140,6 @@ public void kresli(Graphics gr){
         
         index = generuj();
         g.drawImage(cisla[index], 0, 0, null);
-            
-        
-    
 }
     /**
      * @param args the command line arguments
