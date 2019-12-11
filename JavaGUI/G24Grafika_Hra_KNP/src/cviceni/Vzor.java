@@ -21,12 +21,13 @@ import javax.swing.Timer;
  * @author ag
  */
 public class Vzor extends javax.swing.JFrame implements ActionListener{
-    int sirkaPlatna,vyskaPlatna,sirkaImg,vyskaImg,index,i;
+    int sirkaPlatna,vyskaPlatna,sirkaImg,vyskaImg,index1,index2,i,xPosition;
+    boolean hodnoceni;
     Image[] images; //pole obrázků
     Image player1Img, player2Img; //obrázky pro hráče 1 a 2
     Random nahoda; //generování náhodného indexu
     Timer casovac; //časovač pro hru
-    Color colorWin,colorEqual,color; //barvy pozadí pro vítěze a při remíze
+    Color colorWin; //barvy pozadí pro vítěze a při remíze
     /**
      * Creates new form Tecka
      */
@@ -40,15 +41,16 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
                                 new ImageIcon("src/images/kamen.png").getImage(),
                                 new ImageIcon("src/images/nuzky.png").getImage(),
                                 new ImageIcon("src/images/papir.png").getImage(),
+                                new ImageIcon("src/images/nic.png").getImage()
                             };
         player1Img = images[0];
         player2Img = images[0];
         sirkaImg = images[0].getWidth(null); //důležité pro zrcadlení
         vyskaImg = images[0].getHeight(null); //důležité pro zrcadlení
         colorWin = new Color(10,100,5);
-        colorEqual = Color.orange;
+        
         nahoda = new Random();
-        casovac = new Timer(500,this);
+        casovac = new Timer(1000,this);
     }
 
     /**
@@ -67,7 +69,7 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
                 kresli(g);
             }
         };
-        jButton1 = new javax.swing.JButton();
+        tlacitkoLos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,11 +90,11 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
             .addGap(0, 243, Short.MAX_VALUE)
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Hoď");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tlacitkoLos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tlacitkoLos.setText("Losuj");
+        tlacitkoLos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tlacitkoLosActionPerformed(evt);
             }
         });
 
@@ -112,8 +114,8 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
                         .addGap(131, 131, 131)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(249, 249, 249)
+                        .addComponent(tlacitkoLos, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -123,18 +125,20 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelPlatno, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(tlacitkoLos)
+                .addGap(23, 23, 23))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       casovac.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tlacitkoLosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tlacitkoLosActionPerformed
+        tlacitkoLos.setEnabled(false);
+        hodnoceni = false;
+        casovac.start();
+    }//GEN-LAST:event_tlacitkoLosActionPerformed
 
 public void kresli(Graphics gr){  
     //kresli jen pokud je promenna kresli  rovna true
@@ -146,7 +150,10 @@ public void kresli(Graphics gr){
         //nastaveni tloustky cary tvaru
         g.setStroke(new BasicStroke(1));
         //nastaveni barvy pro kresleni tvaru
-        g.setColor(color);
+        g.setColor(colorWin);
+        if(hodnoceni){
+            g.fillRect(xPosition, 0, sirkaPlatna/2, vyskaPlatna);
+        }
         g.drawImage(player1Img, 20, 10, null);
         g.drawImage(player2Img, 295+sirkaImg, 10,-sirkaImg, vyskaImg, null); //zrcadleni obrazku
         
@@ -190,24 +197,58 @@ public void kresli(Graphics gr){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panelPlatno;
+    private javax.swing.JButton tlacitkoLos;
     // End of variables declaration//GEN-END:variables
 
     private int generator() {
-        return index = nahoda.nextInt(3);
+        return nahoda.nextInt(3);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         i++;
-        if(i > 2){
+        if(i > 6){
             i = 0;
             casovac.stop();
+            index1 = generator();
+            player1Img = images[index1];
+            
+            index2 = generator();
+            player2Img = images[index2];
+            tlacitkoLos.setEnabled(true);
+            hodnoceni();
         }
-        //liche i skryje a sude ukaze
-        
+        else{
+            index1 = (i%2!=0) ? 0 : 3;
+            player1Img = images[index1];
+            player2Img = images[index1];
+        }
+        panelPlatno.repaint(); 
+    }
+
+    private void hodnoceni() {
+        if(index1 == index2){
+            //remiza
+            tlacitkoLos.doClick();
+        }
+        else if(index1 == 0){
+           //player1 má kámen
+           hodnoceni = true;
+           xPosition = (index2 == 1) ? 0 : sirkaPlatna/2;
+           
+        }
+        else if(index1 == 1){
+           //player1 má nůžky
+           hodnoceni = true;
+           xPosition = (index2 == 2) ? 0 : sirkaPlatna/2;
+        }
+        else{
+           //player1 má papír
+           hodnoceni = true;
+           xPosition = (index2 == 0) ? 0 : sirkaPlatna/2;
+        }
     }
 
 }
