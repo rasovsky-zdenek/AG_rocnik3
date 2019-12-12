@@ -47,7 +47,7 @@ public class Vzor extends javax.swing.JFrame implements ActionListener{
         player2Img = images[0];
         sirkaImg = images[0].getWidth(null); //důležité pro zrcadlení
         vyskaImg = images[0].getHeight(null); //důležité pro zrcadlení
-        colorWin = new Color(10,100,5);
+        colorWin = new Color(100,200,100);
         
         nahoda = new Random();
         casovac = new Timer(1000,this);
