@@ -28,7 +28,7 @@ public class Vzor extends javax.swing.JFrame {
         System.out.println("Šířka: " + sirka);//pomocny vypis
         System.out.println("Výška: " + vyska);//pomocny vypis
         
-        mezera = 15;
+        mezera = 15;//okraj od hrany okna
         pocetCtverecku = 20;
         deltaX = (sirka/2-mezera)/pocetCtverecku;
         deltaY = deltaX;
@@ -75,7 +75,7 @@ public class Vzor extends javax.swing.JFrame {
             .addGap(0, 428, Short.MAX_VALUE)
         );
 
-        spinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 50, 1));
+        spinner.setModel(new javax.swing.SpinnerNumberModel(20, 1, 20, 1));
         spinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerStateChanged(evt);
@@ -83,7 +83,7 @@ public class Vzor extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Počet zubů");
+        jLabel1.setText("Počet čar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +97,7 @@ public class Vzor extends javax.swing.JFrame {
                     .addComponent(spinner)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -120,7 +120,11 @@ public class Vzor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void spinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerStateChanged
-        
+        String hodnota = spinner.getValue().toString();
+        pocetCtverecku = Integer.parseInt(hodnota);
+        deltaX = (sirka/2-mezera)/pocetCtverecku;
+        deltaY = deltaX;
+        panelPlatno.repaint();
     }//GEN-LAST:event_spinnerStateChanged
 
 public void kresli(Graphics gr){  
